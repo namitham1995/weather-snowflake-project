@@ -1,0 +1,22 @@
+{
+  "QueueConfigurations": [
+    {
+      "QueueArn": "arn:aws:sqs:ap-southeast-1:911891700720:sf-snowpipe-AIDA5IUH3DPYI3LX4SK2K-P9WcNyE5MYprgU4wY3UZaA",
+      "Events": ["s3:ObjectCreated:Put"],
+      "Filter": {
+        "Key": {
+          "FilterRules": [
+            {
+              "Name": "prefix",
+              "Value": "Singapore/"
+            },
+            {
+              "Name": "suffix",
+              "Value": ".json"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
