@@ -1,0 +1,11 @@
+Current Sunrise = 
+VAR LastTimestampPerCity = 
+    CALCULATE(
+        MAX('WEATHER_DATA_CLEAN'[timestamp]),
+        ALLEXCEPT('WEATHER_DATA_CLEAN', 'WEATHER_DATA_CLEAN'[city])
+    )
+RETURN
+    CALCULATE(
+        MAX('WEATHER_DATA_CLEAN'[sunrise]),
+        'WEATHER_DATA_CLEAN'[timestamp] = LastTimestampPerCity
+    )
