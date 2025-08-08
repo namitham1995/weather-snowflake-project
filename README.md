@@ -185,6 +185,8 @@ Scheduled Refresh: In Power BI Service, set up a scheduled refresh for your data
 
 ## 📸 Screenshots
 
+![alt](images/dashboard.png)
+
 ![alt](images/powerbi.png)
 
 💻 Usage
