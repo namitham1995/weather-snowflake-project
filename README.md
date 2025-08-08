@@ -48,14 +48,14 @@ Cloud Platform: Amazon Web Services (AWS)
 
 Compute: AWS Lambda
 
-Scheduling: AWS EventBridge
-![alt](images/cloudwatch.jpg)
+Scheduling: AWS EventBridge  
+![alt](images/cloudwatch.png)  
 Database (NoSQL): Amazon DynamoDB
-![alt](images/dynamodb.jpg)
+![alt](images/dynamodb.png)  
 Storage: Amazon S3
-![alt](images/s3.jpg)
+![alt](images/s3.png)  
 Messaging: Amazon SQS
-![alt](images/sqs.jpg)
+![alt](images/sqs.png)  
 Identity & Access Management: AWS IAM
 
 Data Warehouse: Snowflake
