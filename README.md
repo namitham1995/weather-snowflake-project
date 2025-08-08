@@ -64,13 +64,13 @@ Cloud Platform: Amazon Web Services (AWS)
 Compute: AWS Lambda
 
 Scheduling: AWS EventBridge
-
+![alt](images/cloudwatch.jpg)
 Database (NoSQL): Amazon DynamoDB
-
+![alt](images/dynamodb.jpg)
 Storage: Amazon S3
-
+![alt](images/s3.jpg)
 Messaging: Amazon SQS
-
+![alt](images/sqs.jpg)
 Identity & Access Management: AWS IAM
 
 Data Warehouse: Snowflake
@@ -93,8 +93,8 @@ Version Control: Git / GitHub
 
 your-weather-data-pipeline/  
 ├──  lambda_code/  
-│   ├── lambda_function1.py        
-│   ├── lambda_function2.py         
+│   ├── weather_fetcher.py        
+│   ├── processweatherstream.py         
 │   └── requirements.txt           
 ├── snowflake_sql/  
 │   ├── snowflake_initial_setup.sql              
@@ -105,10 +105,10 @@ your-weather-data-pipeline/
 └──  README.md                      
 
 
-##⚙️ Setup and Deployment
+## ⚙️ Setup and Deployment
 This section outlines the high-level steps to deploy the weather data pipeline. Ensure you have appropriate AWS and Snowflake permissions before proceeding.
 
-1. AWS Setup
+##### 1. AWS Setup
    
 OpenWeatherMap API Key: Obtain a free API key from OpenWeatherMap.
 
@@ -124,7 +124,7 @@ Create an IAM role for your Lambda functions with permissions to access DynamoDB
 
 Create an IAM role ( SnowflakeS3AceessRole01) for Snowflake to access your S3 bucket, with s3:GetObject and s3:ListBucket permissions.
 
-Lambda Function 1 (Ingestion):
+weather_fetcher (Ingestion):
 
 Create a Python 3.9+ Lambda function.
 
@@ -144,7 +144,7 @@ Configure this Lambda to be triggered by the DynamoDB Stream of your WeatherData
 
 S3 Event Notification: In your S3 bucket's Properties tab, configure an event notification for "All object create events" (s3:ObjectCreated:*) to send messages to the SQS queue used by Snowpipe.
 
-2. Snowflake Setup
+##### 2. Snowflake Setup
    
 Execute the SQL scripts located in the snowflake_sql/ directory in the following order:
 
@@ -169,7 +169,8 @@ ALTER PIPE weather_pipe_sgp REFRESH;
 
 snowflake_utility_queries.sql: Use these queries to verify data flow and check component statuses.
 
-3. Power BI Setup
+##### 3. Power BI Setup
+
 Download Power BI Desktop: If you don't have it, download and install Power BI Desktop.
 
 Open Report: Open the power_bi/weather_data.pbix file.
@@ -182,9 +183,9 @@ Publish to Power BI Service: To enable scheduled refreshes and sharing, publish 
 
 Scheduled Refresh: In Power BI Service, set up a scheduled refresh for your dataset to automatically update your dashboard at desired intervals.
 
-📸 Screenshots
+## 📸 Screenshots
 
-![alt](images/powerbi.jpg)
+![alt](images/powerbi.png)
 
 💻 Usage
 
@@ -196,7 +197,7 @@ Interact with the visuals to explore current conditions, trends, and comparisons
 
 Leverage the DAX measures to understand specific metrics like "Latest Temperature," "Current Sunrise," and "Current Sunset."
 
-📈 Future Enhancements
+## Future Enhancements
 
 Expand City Coverage: Add more cities to the CITIES list in your Lambda function.
 
