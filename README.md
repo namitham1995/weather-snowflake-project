@@ -4,7 +4,7 @@ This project implements a robust, automated data pipeline to collect, process, s
 
 🚀 Architecture Overview
 
-
+images/architecture.jpg
 
 The pipeline is designed for continuous data flow, from API ingestion to a ready-for-analysis format.
 
