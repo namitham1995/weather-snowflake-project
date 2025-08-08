@@ -2,30 +2,29 @@
 
 This project implements a robust, automated data pipeline to collect, process, store, and visualize real-time weather data from the OpenWeatherMap API. The pipeline leverages a combination of AWS serverless services and Snowflake for efficient data warehousing, culminating in an interactive Power BI dashboard for analysis.
 
-🚀 Architecture Overview
-
 ![alt](images/architecture.jpg)
 
 The pipeline is designed for continuous data flow, from API ingestion to a ready-for-analysis format.
 
-Data Flow:
+##Data Flow:
 
 OpenWeatherMap API: The external source providing real-time weather information.
 
 AWS EventBridge: Triggers a Lambda function on a scheduled basis to fetch data.
+![alt](images/cloudwatch.jpg)
 
 AWS Lambda (Ingestion): Fetches weather data and stores raw JSON in DynamoDB.
 
 Amazon DynamoDB: Serves as a temporary store for raw data and triggers a stream on new inserts.
-
+![alt](images/dynamodb.jpg)
 DynamoDB Stream: Captures changes (new records) in the DynamoDB table.
 
 AWS Lambda (Processing): Triggered by the DynamoDB stream, this function transforms the data, uploads it to Amazon S3, and sends a notification to an SQS queue.
 
 Amazon S3: Acts as a data lake, storing raw weather data in JSON files.
-
+![alt](images/s3.jpg)
 Amazon SQS: Provides a reliable message queue for S3 event notifications, signaling Snowpipe for new data.
-
+![alt](images/sqs.jpg)
 AWS IAM: Manages secure access and permissions between AWS services and Snowflake.
 
 Snowflake Storage Integration: Securely connects Snowflake to the S3 bucket.
@@ -43,8 +42,8 @@ Snowflake Task (insert_clean_data): A scheduled task that consumes new data from
 Snowflake Clean Data Table (weather_data_clean): Stores the processed, strongly-typed weather data, optimized for analytics.
 
 Power BI: Connects directly to the weather_data_clean table in Snowflake to build interactive dashboards and visualizations.
-
-✨ Features
+![alt](images/powerbi.jpg)
+##✨ Features
 Automated Data Ingestion: Seamlessly collects real-time weather data from OpenWeatherMap API.
 
 Serverless Architecture: Utilizes AWS Lambda, DynamoDB, S3, and SQS for scalable and cost-effective operations.
@@ -59,7 +58,7 @@ Interactive Visualization: Provides a dynamic Power BI dashboard for current wea
 
 Version Control: All code and configurations are managed in GitHub for traceability and collaboration.
 
-🛠️ Technologies Used
+##🛠️ Technologies Used
 Cloud Platform: Amazon Web Services (AWS)
 
 Compute: AWS Lambda
@@ -90,7 +89,7 @@ Business Intelligence: Microsoft Power BI
 
 Version Control: Git / GitHub
 
-📂 Project Structure
+##📂 Project Structure
 your-weather-data-pipeline/
 ├── lambda_code/
 │   ├── lambda_function1.py       # Fetches data and stores in DynamoDB
@@ -105,10 +104,11 @@ your-weather-data-pipeline/
 └── README.md                     # This file
 
 
-⚙️ Setup and Deployment
+##⚙️ Setup and Deployment
 This section outlines the high-level steps to deploy the weather data pipeline. Ensure you have appropriate AWS and Snowflake permissions before proceeding.
 
 1. AWS Setup
+   
 OpenWeatherMap API Key: Obtain a free API key from OpenWeatherMap.
 
 DynamoDB Table: Create a DynamoDB table named WeatherData with city as the Partition Key and timestamp as the Sort Key. Enable DynamoDB Streams (New and Old Images).
@@ -144,6 +144,7 @@ Configure this Lambda to be triggered by the DynamoDB Stream of your WeatherData
 S3 Event Notification: In your S3 bucket's Properties tab, configure an event notification for "All object create events" (s3:ObjectCreated:*) to send messages to the SQS queue used by Snowpipe.
 
 2. Snowflake Setup
+   
 Execute the SQL scripts located in the snowflake_sql/ directory in the following order:
 
 snowflake_initial_setup.sql: Run this first to get your current region, account, and set up the storage integration with AWS. Note the STORAGE_AWS_EXTERNAL_ID and STORAGE_AWS_IAM_USER_ARN from DESC INTEGRATION s3_int_weather_sgp; output, as you'll need these for your AWS IAM role's trust policy.
@@ -182,9 +183,7 @@ Scheduled Refresh: In Power BI Service, set up a scheduled refresh for your data
 
 📸 Screenshots
 
-
-
-
+![alt](images/powerbi.jpg)
 
 💻 Usage
 
