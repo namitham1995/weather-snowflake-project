@@ -9,7 +9,7 @@ dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("WeatherData")
 
 API_KEY = "f8c6bd11e9d8cd837b6a6c586024c7f9"
-CITIES = ["Bangalore", "Delhi", "Mumbai"]  # ✅ Add more cities here
+CITIES = ["Bangalore", "Delhi", "Mumbai"]  
 
 def lambda_handler(event, context):
     for city in CITIES:
